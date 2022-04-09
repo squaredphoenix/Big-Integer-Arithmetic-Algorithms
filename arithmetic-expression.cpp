@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Arithmetic-Expression.hpp"
+#include "arithmetic-expression.hpp"
 using namespace std;
 
 ArithmeticExpression::ArithmeticExpression()
