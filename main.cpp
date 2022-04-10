@@ -8,11 +8,18 @@ using namespace std;
 
 int main()
 {
+    int count = 0;
+
     ExpressionReader er("expressions.txt");
 
     while(er.readNextExpression())
     {
-        cout << er.getResult() << endl;
-        cout << "----------" << endl;
+        if(count > 3)
+        {
+            cout << er.getResult() << endl;
+            cout << "----------" << endl;
+        }
+
+        count++;
     }
 }
