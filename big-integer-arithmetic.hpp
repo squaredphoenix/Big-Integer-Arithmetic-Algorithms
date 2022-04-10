@@ -2,6 +2,7 @@
 #define BIG_INTEGER_ARITHMETIC_H
 
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 #include "arithmetic-expression.hpp"
 #include "stack.hpp"
@@ -14,8 +15,8 @@ class BigIntegerArithmetic
         BigIntegerArithmetic();
         BigIntegerArithmetic(ArithmeticExpression ae);
         int operandComp(string opt1, string opt2);
-        void Length();
-        void greatLenght();
+        int Length();
+        void greatLength();
         void makeStack();
         string getResults();
 
@@ -24,10 +25,10 @@ class BigIntegerArithmetic
         string opt2;
         char opt3;
         string result;
-        int gL;
-        int cL;
         int l1;
         int l2;
+        int l3;
+        int gL;
         int cary;
         string digit;
         int number;

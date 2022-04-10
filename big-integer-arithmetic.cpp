@@ -1,7 +1,4 @@
-#include <iomanip>
 #include <iostream>
-#include <sstream>
-#include <string>
 #include "big-integer-arithmetic.hpp"
 #include "stack.hpp"
 using namespace std;
@@ -50,7 +47,7 @@ int BigIntegerArithmetic::operandComp(string newOpt1, string newOpt2)
     return 0;
 }
 
-void BigIntegerArithmetic::Length()
+int BigIntegerArithmetic::Length()
 {
     l1 = 0;
     l2 = 0;
@@ -60,19 +57,17 @@ void BigIntegerArithmetic::Length()
 
     if(operandComp(opt1, opt2) == 1)
     {
-        cL = opt1.length();
+        return opt1.length();
     }
 
     else
     {
-        cL = opt2.length();
+        return opt2.length();
     }
 }
 
-void BigIntegerArithmetic::greatLenght()
+void BigIntegerArithmetic::greatLength()
 {
-    gL = 0;
-
     if(l1 > l2)
     {
         if(l1 > count)
@@ -141,9 +136,11 @@ string BigIntegerArithmetic::getResults()
 
     makeStack();
 
+    borrow = 0;
+
     if(opt3 == '+')
     {
-        for(int i = 0; i <= cL; i++)
+        for(int i = 0; i <= Length(); i++)
         {
             if(!stack1.empty() || !stack2.empty() || check)
             {
@@ -198,7 +195,7 @@ string BigIntegerArithmetic::getResults()
     {
         if(operandComp(opt1, opt2) == -1) // works
         {
-            for(int i = 0; i < cL; i++)
+            for(int i = 0; i < Length(); i++)
             {
                 if(!stack1.empty())
                 {
@@ -242,10 +239,19 @@ string BigIntegerArithmetic::getResults()
 
         else
         {
-            for(int i = 0; i < cL; i++)
+            for(int i = 0; i < Length(); i++)
             {
                 num1 = stack1.pop() - borrow;
-                num2 = stack2.pop();
+
+                if(!stack2.empty())
+                {
+                    num2 = stack2.pop();
+                }
+
+                else
+                {
+                    num2 = 0;
+                }
                 
                 if(operandComp(to_string(num1), to_string(num2)) == -1)
                 {
@@ -260,13 +266,15 @@ string BigIntegerArithmetic::getResults()
 
                 number2 = num1 - num2;
                 
-                if(!stack2.empty() || !(num1 == 0))
+                if(!stack2.empty() || !(num2 == 0))
                 {
                     stack3.push(number2);
                 }
             }
         }
     }
+
+    count = 0;
 
     while(!stack3.empty())
     {
@@ -282,17 +290,9 @@ string BigIntegerArithmetic::getResults()
         result += to_string(num3); 
     }
 
-    greatLenght();
+    greatLength();
 
-    if(opt3 == '+')
-    {
-        word << setfill(' ') << setw(gL + 1) << opt1 << '\n' << setfill(' ') << setw(1) << opt3 << setfill(' ') << setw(gL) <<  opt2 << '\n' << setfill(' ') << setw(gL + 1) << result;
-    }
-    
-    else
-    {
-        word << setfill(' ') << setw(gL + 1) << opt1 << '\n' << setfill(' ') << setw(1) << opt3 << setfill(' ') << setw(gL) << opt2 << '\n' << setfill(' ') << setw(gL + 1) << result;
-    }
+    word << setfill(' ') << setw(gL + 1) << opt1 << '\n' << setfill(' ') << setw(1) << opt3 << setfill(' ') << setw(gL) <<  opt2 << '\n' << setfill(' ') << setw(gL + 1) << result;
 
     return word.str();
 }

@@ -10,7 +10,7 @@ ExpressionReader::ExpressionReader(string newEr)
 bool ExpressionReader::readNextExpression()
 {
     iFile >> num1;
-
+    
     if(!iFile.eof())
     {
         iFile >> char1; 
