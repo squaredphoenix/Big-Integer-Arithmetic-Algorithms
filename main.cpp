@@ -1,14 +1,10 @@
 #include <iostream>
 #include "expression-reader.hpp"
-#include "arithmetic-expression.hpp"
-#include "big-integer-arithmetic.hpp"
-#include "operand.hpp"
-#include "stack.hpp"
 using namespace std;
 
 int main()
 {
-    int count = 0;
+    int count;
 
     ExpressionReader er("expressions.txt");
 
